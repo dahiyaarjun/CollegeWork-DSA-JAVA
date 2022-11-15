@@ -1,0 +1,30 @@
+import java.util.*;
+public class ArmstrongN{
+    public static void main(String[] args) {
+        ArrayList<Integer> ans=getAllArmstrong(0,1000);
+        System.out.println(ans);
+        // System.out.println(isArmstrong(9474, 9074, 4, 0));
+    }
+    static ArrayList<Integer> getAllArmstrong(int start,int range){
+        if(range==0){
+            return new ArrayList<Integer>();
+        }
+        ArrayList<Integer> l=getAllArmstrong(start,range-1);
+        if(isArmstrong(range,range,count(range),0)){
+            l.add(range);
+        }
+        return l;
+    }
+    public static int count(int n){
+        if(n==0){
+            return 0;
+        }return count(n/10)+1;
+    }
+    public static boolean isArmstrong(int n,int org,int count,int sum){
+        if(n==0){
+            if(sum==org) return true;
+            else return false;
+        }
+        return isArmstrong(n/10,org,count,sum+=Math.pow((n%10),count));
+    }
+}
