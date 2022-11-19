@@ -1,0 +1,15 @@
+class Reverse
+{
+    // Complete the function
+    // str: input string
+    public static String reverseWord(String str)
+    {
+        return doReverse(str,0);
+    }
+    static String doReverse(String str,int i){
+        if(i==str.length()){
+            return "";
+        }
+        return doReverse(str,i+1)+str.charAt(i);
+    }
+}
