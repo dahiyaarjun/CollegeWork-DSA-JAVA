@@ -1,0 +1,32 @@
+class Solution {
+    public List<String> find_permutation(String S) {
+        List<String> slist=getPer(S);
+        Set<String> st=new HashSet<>();
+        for(String t:slist)
+            st.add(t);
+        List<String> ans=new ArrayList<>();
+        for(String t:st)
+            ans.add(t);
+        Collections.sort(ans);
+        return ans;
+    }
+    public static ArrayList<String> getPer(String s){
+        if(s.length()==0){
+            ArrayList<String> list=new ArrayList<>();
+            list.add("");
+            return list;
+        }
+        char sChar=s.charAt(0);
+        String subs=s.substring(1);
+        ArrayList<String> newlist=new ArrayList<>();
+        ArrayList<String> list=getPer(subs);
+        for(int i=0;i<list.size();i++){
+            int l=list.get(i).length();
+            for(int j=0;j<=l;j++){
+                StringBuffer t=new StringBuffer(list.get(i));
+                t.insert(j, sChar);
+                newlist.add(t.toString());
+            }
+        }return newlist;
+    }
+}
