@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+public class BoardDiceGame {
+    public static void main(String[] args) {
+        System.out.println(getDicePos(0,10));
+    }
+    static ArrayList<String> getDicePos(int start,int target){
+        if(start==target){
+            ArrayList<String> list=new ArrayList<>();
+            list.add("");
+            return list;
+        }
+        if(start>target){
+            return new ArrayList<String>();
+        }
+        ArrayList<String> Flist=new ArrayList<>();
+        for(int dice=1;dice<=6;dice++){
+            ArrayList<String> list= getDicePos(dice+start, target);
+            for(String str:list){
+                Flist.add(str+dice);
+            }
+        }return Flist;
+    }
+}
