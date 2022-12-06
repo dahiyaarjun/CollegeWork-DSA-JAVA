@@ -1,0 +1,53 @@
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> ans=new ArrayList<>();
+        char[][] board=new char[n][n];
+        countNumberOfWay(0,ans,board);
+        return ans;
+    }
+    static boolean canIPlace(int row,int col,char[][] board){
+        int n=board.length;
+        for(int i=col;i>=0;i--){
+            if(board[row][i]=='Q'){
+                return false;
+            }
+        }
+        for(int i=row,j=col;i>=0&&j>=0;i--,j--){
+            if(board[i][j]=='Q'){
+                return false;
+            }
+        }
+        for(int i=row,j=col;j>=0&&i<n;i++,j--){
+            if(board[i][j]=='Q'){
+                return false;
+            }
+        }
+        return true;
+    }
+    static void countNumberOfWay(int col,List<List<String>> ans,char[][] board){
+        if(col==board.length){
+            ans.add(construct(board));
+            return;
+        };
+        for(int row=0;row<board.length;row++){
+            if(canIPlace(row,col,board)){
+                board[row][col]='Q';
+                countNumberOfWay(col+1,ans,board);
+                board[row][col]='.';
+            }
+        }return;
+    }
+    static List<String> construct(char[][] board){
+        List<String> l=new ArrayList<>();
+        for(int i=0;i<board.length;i++){
+            String s="";
+            for(int j=0;j<board.length;j++){
+                if(board[i][j]=='Q'){
+                    s=s+'Q';
+                }else{
+                    s=s+'.';
+                }
+            }l.add(s);
+        }return l;
+    }
+}
