@@ -1,0 +1,25 @@
+class Solution {
+    static ArrayList<ArrayList<String>> allPalindromicPerms(String S) {
+        ArrayList<ArrayList<String>> list=new ArrayList<>();
+        getPalindromic(S,0,new ArrayList<>(),list);
+        return list;
+    }
+    public static void getPalindromic(String s,int index,ArrayList<String> path,ArrayList<ArrayList<String>> list){
+        if(index==s.length()){
+            list.add(new ArrayList<>(path));
+            return;
+        }
+        for(int i=index;i<s.length();++i){
+            if(isPalindrome(s,index,i)){
+                path.add(s.substring(index,i+1));
+                getPalindromic(s,i+1,path,list);
+                path.remove(path.size()-1);
+            }
+        }return;
+    }
+    static boolean isPalindrome(String s,int a,int b){
+        while(a<=b){
+            if(s.charAt(a++)!=s.charAt(b--)) return false;
+        }return true;
+    }
+};
